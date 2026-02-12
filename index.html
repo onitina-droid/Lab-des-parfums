@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lab Parfum - Personnalisation</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<header class="nav-bar">
+    <div class="logo">
+        <div class="pixel-bottle-icon">
+            <img src="assets/images/logo_parfum.png" alt="Logo Lab Parfum" width="30" height="30">
+        </div> 
+        <span>Lab Parfum - Personnalisation</span>
+    </div>
+    <nav class="nav">
+        <a href="#" title="Rechercher une commande" onclick="demarrerRecherche(); return false;"> 
+            <img src="assets/images/recherche.png" alt="Rechercher" width="30" height="30">
+        </a>
+        <a href="#" title="Nouvelle commande" onclick="demarrerNouvelleCommande(); return false;"> 
+            <img src="assets/images/nouveau.png" alt="Nouvelle" width="30" height="30">
+        </a>
+        <a href="#" title="Menu principal" onclick="afficherMenuPrincipal(); return false;"> 
+            <img src="assets/images/home.png" alt="Menu" width="30" height="30">
+        </a>
+    </nav>
+</header>
+
+<div class="status-bar">
+    <span id="status-text">🔄 Connexion en cours...</span>
+</div>
+
+<main class="container">
+    <div class="progress-bar" style="display: none;">
+        <div class="step" id="step1">
+            <span class="cloud">
+                <img src="assets/images/fleur-de-cerisier.png" alt="Essence" width="30" height="30">
+            </span>
+            <p>Essence</p>
+        </div>
+        <div class="step" id="step2">
+            <span class="cloud">
+                <img src="assets/images/flacon-de-parfum.png" alt="Flacon" width="30" height="30">
+            </span>
+            <p>Flacon</p>
+        </div>
+        <div class="step" id="step3">
+            <span class="cloud">
+                <img src="assets/images/bobine-de-fil.png" alt="Cordon" width="30" height="30">
+            </span>
+            <p>Cordon</p>
+        </div>
+        <div class="step" id="step4">
+            <span class="cloud">
+                <img src="assets/images/gravure.png" alt="Gravure" width="30" height="30">
+            </span>
+            <p>Gravure</p>
+        </div>
+    </div>
+
+    <section class="lab-card">
+        <h2 class="pixel-text" id="titre-etape">Lab Parfum</h2>
+        <div class="essence-grid" id="contenu-etape">
+            <!-- Contenu dynamique généré par JavaScript -->
+            <div class="option-card menu-card" onclick="demarrerNouvelleCommande()">
+                <span class="emoji">✨</span>
+                <h3>Nouvelle Commande</h3>
+                <p>Créer un parfum personnalisé en 4 étapes</p>
+            </div>
+            <div class="option-card menu-card" onclick="demarrerRecherche()">
+                <span class="emoji">🔍</span>
+                <h3>Rechercher une Commande</h3>
+                <p>Retrouvez une commande existante par son code</p>
+            </div>
+            <div class="option-card menu-card" onclick="quitterApp()">
+                <span class="emoji">🚪</span>
+                <h3>Quitter</h3>
+                <p>Fermer l'application</p>
+            </div>
+        </div>
+
+        <div class="controls" id="controles-etape">
+            <!-- Contrôles dynamiques générés par JavaScript -->
+            <button class="btn" onclick="afficherMenuPrincipal()" style="background: #ff6b6b; color: white;">
+                Menu principal
+            </button>
+        </div>
+    </section>
+    
+    <!-- SECTION IMPORTANTE : Champ de texte et bouton pour la gravure/recherche -->
+    <div class="mes_final">
+    <input type="text" id="message" placeholder="..." style="display: none;">
+    <button onclick="envoyerGravure()" class="bouton" id="cta" style="display: none;">Envoyer</button>
+    </div>
+</main>
+
+<!-- Éléments décoratifs -->
+<div class="sparkle s1">✨</div>
+<div class="sparkle s1">✨</div>
+<div class="sparkle s2">✨</div>
+<div class="sparkle s2">✨</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 Lab Parfum — Création personnalisée de parfums 💖 | 
+        <span id="connection-status">🟡 Connexion...</span>
+    </p>
+</footer>
+
+<!-- Bouton pour afficher/masquer les logs -->
+<button class="debug-toggle" onclick="document.getElementById('log').style.display = document.getElementById('log').style.display === 'none' ? 'block' : 'none'">
+    Debug
+</button>
+
+<!-- Zone de logs -->
+<pre id="log"></pre>
+
+<!-- Script principal -->
+<script src="renderer.js"></script>
+
+<script>
+  // Initialisation supplémentaire
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM chargé');
+    
+    // Mettre à jour le statut de connexion
+    setTimeout(() => {
+      const statusElement = document.getElementById('connection-status');
+      if (statusElement) {
+        statusElement.textContent = '🟡 Connexion...';
+      }
+    }, 1000);
+    
+    // Gérer la touche Entrée dans le champ de texte
+    const messageInput = document.getElementById('message');
+    if (messageInput) {
+      messageInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          const ctaButton = document.getElementById('cta');
+          if (ctaButton && ctaButton.style.display !== 'none') {
+            ctaButton.click();
+          }
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
